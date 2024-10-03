@@ -9,9 +9,7 @@ import com.ecommerce.project.repository.CategoryRepository;
 import com.ecommerce.project.repository.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -86,5 +84,14 @@ public class ProductServiceImpl implements ProductService {
 //        store updated product tp repo or database
         Product savedProduct = productRepository.save(productFromDatabase);
         return modelMapper.map(savedProduct,ProductDTO.class);
+    }
+
+    @Override
+    public ProductDTO deleteProduct(Long productId) {
+
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product", "productId", productId));
+        productRepository.delete(product);
+        return modelMapper.map(product, ProductDTO.class);
     }
 }
