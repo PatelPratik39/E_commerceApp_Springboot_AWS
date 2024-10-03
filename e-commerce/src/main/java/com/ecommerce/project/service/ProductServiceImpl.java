@@ -7,18 +7,19 @@ import com.ecommerce.project.payload.ProductDTO;
 import com.ecommerce.project.repository.CategoryRepository;
 import com.ecommerce.project.repository.ProductRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
     private final ModelMapper modelMapper;
-    private ProductRepository productRepository;
-    private CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
-    public ProductServiceImpl(ModelMapper modelMapper) {
+    public ProductServiceImpl(ModelMapper modelMapper, ProductRepository productRepository, CategoryRepository categoryRepository) {
         this.modelMapper = modelMapper;
+        this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @Override
