@@ -61,5 +61,4 @@ public class User {
     private Set<Product> products;
 
 
-
 }
