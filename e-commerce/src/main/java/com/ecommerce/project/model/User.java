@@ -14,25 +14,33 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "username"),
+        @UniqueConstraint(columnNames = "email")
+})
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
     @NotBlank
     @Size(min = 3, max = 20)
-    private String username;
+    @Column(name = "username")
+    private String userName;
+
     @NotBlank
     @Size(max = 50)
+    @Column(name = "email")
     private String email;
+
     @NotBlank
     @Size( max = 120)
     private String password;
 
-    public User(String username, String email, String password) {
-        this.username = username;
+    public User(String userName, String email, String password) {
+        this.userName = userName;
         this.email = email;
         this.password = password;
     }
