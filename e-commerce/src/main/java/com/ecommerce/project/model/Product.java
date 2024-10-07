@@ -19,6 +19,9 @@ public class Product {
     @NotBlank
     @Size(min = 3, message = "Product name must contain atleast 3 characters")
     private String productName;
+
+    @NotBlank
+    @Size(min = 6, message = "Product description must contain atleast 6 characters")
     private String description;
     private String image;
     private double price;
@@ -29,4 +32,10 @@ public class Product {
     @JoinColumn(name = "category_id")
     @ManyToOne
     private Category category;
+
+//    to manager Seller-side scenarios
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private User user;
+
 }
